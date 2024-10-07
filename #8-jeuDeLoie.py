@@ -27,7 +27,7 @@ while not c:
     tours += 1  
     for i in range(nbJoueurs):
         joueurActuel = pseudo[i]
-        avancementDuJoueur = randomNumber()        
+        avancementDuJoueur = randomNumber()
         
         if devinerNombre(case, nbCases, joueurActuel, tours):
             c = True  
