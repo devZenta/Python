@@ -7,17 +7,23 @@ def randomNumber() :
     nb_aleatoire = randint(1, 6)
     return nb_aleatoire
 
-def devinerNombre(a, b, joueur, tours):
-    if a != b:
-        print(f'{joueur}, vous êtes à la case {case}')
-        return False
-    else:
-        print(f'{joueur} a gagné !. Gagné en {tours} tours.')
+def verifierVictoire(position, joueur, tours):
+    if position >= nbCases:
+        print(f'{joueur} a gagné ! Gagné en {tours} tours.')
         return True
+    else:
+        return False
+
+def afficherPlateau(pseudo, positions):
+    print("\n--- Plateau de jeu ---")
+    for i in range(len(pseudo)):
+        print(f'{pseudo[i]} est à la case {positions[i]}')
+    print("----------------------\n")
 
 tours = 0
 pseudo = []
-c = False
+positions = [0] * nbJoueurs 
+c = False  
 
 for i in range(1, nbJoueurs + 1):
     response = input(f"Quel est ton pseudo (Joueur {i}) ? ")
@@ -25,10 +31,20 @@ for i in range(1, nbJoueurs + 1):
 
 while not c:
     tours += 1  
+    print(f"\n=== Tour {tours} ===")
+    
     for i in range(nbJoueurs):
         joueurActuel = pseudo[i]
-        avancementDuJoueur = randomNumber()
+
+        input(f"{joueurActuel}, appuie sur Entrée pour lancer le dé...")
         
-        if devinerNombre(case, nbCases, joueurActuel, tours):
+        avancementDuJoueur = randomNumber() 
+        positions[i] += avancementDuJoueur
+        
+        print(f'{joueurActuel} a lancé un {avancementDuJoueur} et avance à la case {positions[i]}')
+
+        if verifierVictoire(positions[i], joueurActuel, tours):
             c = True  
-            break    
+            break  
+
+    afficherPlateau(pseudo, positions)    
