@@ -8,7 +8,7 @@ def randomNumber() :
     return nb_aleatoire
 
 def verifierVictoire(position, joueur, tours):
-    if position >= nbCases:
+    if position == nbCases:
         print(f'{joueur} a gagné ! Gagné en {tours} tours.')
         return True
     else:
@@ -38,8 +38,12 @@ while not c:
 
         input(f"{joueurActuel}, appuie sur Entrée pour lancer le dé...")
         
-        avancementDuJoueur = randomNumber() 
+        avancementDuJoueur = randomNumber()
         positions[i] += avancementDuJoueur
+
+        if positions[i] > nbCases :
+            surplus = positions[i] - nbCases
+            positions[i] = nbCases - surplus 
         
         print(f'{joueurActuel} a lancé un {avancementDuJoueur} et avance à la case {positions[i]}')
 
